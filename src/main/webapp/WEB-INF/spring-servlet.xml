@@ -36,7 +36,7 @@
 		</mvc:message-converters>
 		
 		<mvc:argument-resolvers>
-			<bean class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+			<bean class="com.talk.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -49,23 +49,19 @@
 	<!-- Interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="com.douzone.mysite.security.SiteInterceptor" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/user/auth"/>
-			<bean class="com.douzone.mysite.security.LoginInterceptor" />
+			<mvc:mapping path="/user/login"/>
+			<bean class="com.talk.security.LoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/logout"/>
-			<bean class="com.douzone.mysite.security.LogoutInterceptor" />
+			<bean class="com.talk.security.LogoutInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/user/auth"/>
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/assets/**"/>
-			<bean class="com.douzone.mysite.security.AuthInterceptor" />
+			<bean class="com.talk.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

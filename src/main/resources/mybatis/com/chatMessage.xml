@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.talk.dao.ChatMessageDao">
+	<insert id="insert_message" parameterType="com.talk.vo.ChatMessage">
+		INSERT INTO CHAT_MESSAGE
+		(CHAT_NO, SENDER, READ_CNT, MESSAGE) <!-- msg_sq, regdate 값은 자동 생성 -->
+		VALUES
+		(
+			#{chat_no},#{sender},#{read_cnt},#{message}
+		)
+	</insert>
+	
+	<select id="list_chatmsg" parameterType="hashmap" resultType="com.talk.vo.ChatMessage">
+		SELECT *
+			 , CHATMSG.READ_CNT <!-- 누가 읽을때마다 값 +1 되게 세팅하면 되겠다 -->
+		FROM CHAT_MESSAGE CHATMSG
+		WHERE CHATMSG.CHAT_NO = #{P_CHAT_NO}
+	</select>
+
+</mapper>

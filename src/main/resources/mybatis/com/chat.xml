@@ -3,11 +3,19 @@
 
 <mapper namespace="com.talk.dao.ChatDao">
 	<insert id="insert_chat" parameterType="com.talk.vo.Chat">
-		INSERT INTO CHAT
+		INSERT INTO CHAT(NO, TITLE, REGDATE)
 		VALUES
 		(
-			null, #{title}, #{contents}, #{joinCount},
-			now(), #{type}
+			null, #{title},null
 		)
 	</insert>
+	
+	<select id="list_chat" parameterType="hashmap" resultType="com.talk.vo.Chat">
+		SELECT NO
+			 , TITLE
+			 , REGDATE
+		FROM CHAT
+	</select>
+
+	
 </mapper>

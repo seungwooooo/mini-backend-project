@@ -1,5 +1,7 @@
 package com.talk.vo;
 
+import java.util.Date;
+
 public class ChatMessage {
 	
 	private String msg_sq;
@@ -11,6 +13,8 @@ public class ChatMessage {
 	private String read_cnt;
 	
 	private String message;
+	
+	private Date regdate;
 
 	public String getMsg_sq() {
 		return msg_sq;
@@ -50,6 +54,14 @@ public class ChatMessage {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 
 }

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.talk.service.ChatMessageService;
+import com.talk.service.ChatService;
 import com.talk.service.MemberService;
+import com.talk.vo.Chat;
 import com.talk.vo.ChatMessage;
 import com.talk.vo.JsonResult;
 import com.talk.vo.Member;
@@ -30,6 +32,10 @@ public class UserController {
 
 	@Autowired
 	private ChatMessageService msgService;
+	
+	@Autowired
+	private ChatService chatService;
+	
 	//로그인은 interceptor에서 처리
 	@RequestMapping("/login")
 	public String userlogin(
@@ -49,6 +55,7 @@ public class UserController {
 		return "sucess";
 	}
 	
+	//채팅메시지
 	@RequestMapping("/list_chatmsg")
 	public List<ChatMessage> list_chatmsg(
 			@RequestParam("chat_no") String chat_no
@@ -67,6 +74,28 @@ public class UserController {
 			@RequestBody ChatMessage msg
 	) throws Exception {
 		msgService.insert_message(msg);
+
+	}
+	
+	//채팅방
+	@RequestMapping("/list_chat")
+	public List<Chat> list_chat(
+			@RequestParam("chat_no") String chat_no
+	) throws Exception {
+		HashMap<String, Object> parameters = new HashMap<String, Object>();		
+		
+		parameters.put("P_CHAT_NO", chat_no);
+
+		List<Chat> chat = chatService.list_chat(parameters);
+
+		return chat;
+	}
+	
+	@PostMapping("/insert_chat")
+	public void insert_chat(
+			@RequestBody Chat chat
+	) throws Exception {
+		chatService.insert_chat(chat);
 
 	}
 
